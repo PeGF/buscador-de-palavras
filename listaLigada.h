@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "listaLigada.c"
 
 #define TAMANHO 1000
 
