@@ -55,6 +55,7 @@ Indice criaIndex(FILE *file) {
             token = strtok(NULL, " ,.!?\n");
         }
     }
+    indice.numeroDeLinhas = numeroLinha;
 
     return indice;
 }

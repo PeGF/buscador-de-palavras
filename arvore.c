@@ -78,6 +78,16 @@ treeno *inserirPalavra(treeno *raiz, const char *palavra, int linha, const char 
     return raiz;
 }
 
+void imprimeReverso(Ocorrencia* ocorrenciaAtual)
+{ 
+    if (ocorrenciaAtual == NULL)
+       return;
+ 
+    imprimeReverso(ocorrenciaAtual->prox);
+
+    printf("  %05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+}
+
 void TreeVerificarPalavra(treeno *raiz, const char *alvo) {
     if (raiz == NULL) {
         printf("Palavra '%s' não encontrada.\n", alvo);
@@ -90,10 +100,7 @@ void TreeVerificarPalavra(treeno *raiz, const char *alvo) {
         printf("Palavra '%s' encontrada nas seguintes linhas:\n", alvo);
 
         Ocorrencia *ocorrenciaAtual = raiz->ocorrencias;
-        while (ocorrenciaAtual != NULL) {
-            printf("   Linha %d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
-            ocorrenciaAtual = ocorrenciaAtual->prox;
-        }
+        imprimeReverso(ocorrenciaAtual);
     } else if (comparacao < 0) {
         TreeVerificarPalavra(raiz->esquerda, alvo);
     } else {

@@ -8,6 +8,7 @@ typedef struct {
 typedef struct {
     Entrada *entrada;
     int tamanho;
+    int numeroDeLinhas;
 } Indice;
 
 void adicionaOcorrencia(Entrada *entrada, int numeroLinha);

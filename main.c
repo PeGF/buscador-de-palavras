@@ -38,8 +38,8 @@ int main(int argc, char *argv[]) {
 
         printf("Tipo de indice: '%s'\n", tipoEstrutura);
         printf("Arquivo texto: '%s'\n", nomeArquivo);
-        printf("Numero de linhas no arquivo: %d\n", indice.tamanho);
-        printf("Tempo para carregar o arquivo e construir o indice: %lf ms\n", tempoParaAbrir);
+        printf("Numero de linhas no arquivo: %d\n", indice.numeroDeLinhas);
+        printf("Tempo para carregar o arquivo e construir o indice: %.4lf ms\n", tempoTotalLista);
 
         char **linhas = malloc(indice.tamanho * sizeof(char *));
         fseek(file, 0, SEEK_SET);
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
                 inicioTempo = clock();
                 Entrada *result = procuraPalavra(&indice, word);
                 fimTempo = clock();
-                int procuraTempo = (int)((fimTempo - inicioTempo) * 1000 / CLOCKS_PER_SEC);
+                double procuraTempo = ((double)(fimTempo - inicioTempo)/CLOCKS_PER_SEC) * 1000.0;
 
                 if (result != NULL) {
                     printOcorrencias(result, linhas);
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
                     printf("Palavra '%s' nao encontrada.\n", word);
                 }
 
-                printf("Tempo de busca: %d ms\n", procuraTempo);
+                printf("Tempo de busca: %.4lf ms\n", procuraTempo);
             } else if (strcmp(comando, "fim") == 0) {
                 break;
             } else {
@@ -93,22 +93,19 @@ int main(int argc, char *argv[]) {
         char * quebra_de_linha;
         char * palavra;	
         int contador_linha = 0;
-        char nomeArquivo[50];
         char indice[10];
         char busca[6];
 
         printf("Tipo de indice: 'arvore'\n");
-        printf("Arquivo texto: '%s'\n", argv[1]);
+        printf("Arquivo texto: '%s'\n", nomeArquivo);
 
-        clock_t inicioTempo = clock();
-
+        clock_t inicioArvore = clock();
         treeno *raiz = NULL;
 
         linha = (char *) malloc((TAMANHOLINHA + 1) * sizeof(char));
 
-        while (fgets(linha, TAMANHOLINHA, in) != NULL) {
+        while (fgets(linha, TAMANHOLINHA, file) != NULL) {
             contador_linha++;
-
             char *quebraDeLinha = strchr(linha, '\n');
             if (quebraDeLinha != NULL) {
                 *quebraDeLinha = '\0';
@@ -117,7 +114,6 @@ int main(int argc, char *argv[]) {
             char conteudoLinha[TAMANHOLINHA];
             strncpy(conteudoLinha, linha, TAMANHOLINHA - 1);
             conteudoLinha[TAMANHOLINHA - 1] = '\0';
-
             palavra = strtok(linha, " ");
 
             while (palavra != NULL) {
@@ -128,8 +124,8 @@ int main(int argc, char *argv[]) {
 
         fclose(file);
 
-        clock_t fimTempo = clock();
-        double tempoArvore = ((double)(fimTempo - inicioTempo)/CLOCKS_PER_SEC) * 1000.0;
+        clock_t fimArvore = clock();
+        double tempoArvore = ((double)(fimArvore - inicioArvore)/CLOCKS_PER_SEC) * 1000.0;
         double tempoTotalArvore = tempoArvore + tempoParaAbrir;
 
         printf("Numero de linhas no arquivo: %d\n", contador_linha);
