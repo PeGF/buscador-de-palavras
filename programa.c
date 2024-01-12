@@ -1,4 +1,9 @@
-#include "structs.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "arvore.c"
+#include "listaLigada.c"
 
 int main(int argc, char ** argv){
 
