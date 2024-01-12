@@ -58,28 +58,28 @@ void verificarPalavra(no* cabeca, const char *alvo) {
     no* atual = cabeca;
     int encontrada = 0;
 
+    printf("Palavra '%s' encontrada nas seguintes linhas:\n", alvo);
+
     while (atual != NULL) {
         if (strcmp(atual->palavra, alvo) == 0) {
             encontrada = 1;
-            printf("Palavra '%s' encontrada nas seguintes linhas:\n", alvo);
 
             Ocorrencia *ocorrenciaAtual = atual->numOcorr;
+            int linhaAnterior = -1;  
             while (ocorrenciaAtual != NULL) {
-                printf("   Linha %d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+                if (ocorrenciaAtual->linha != linhaAnterior) {
+                    printf("   Linha %d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+                }
+                linhaAnterior = ocorrenciaAtual->linha;
                 ocorrenciaAtual = ocorrenciaAtual->prox;
             }
         }
         atual = atual->prox;
     }
 
-if (!encontrada) 
+    if (!encontrada) 
         printf("Palavra '%s' nao encontrada.\n", alvo);
 }
-
-
-
-
-
 
 
 void imprimirLista(no *cabeca) {
