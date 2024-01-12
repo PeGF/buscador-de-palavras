@@ -64,4 +64,5 @@ void printOcorrencias(Entrada *entrada, char **linhas) {
     for (int i = 0; i < entrada->contador; i++) {
         printf("%05d: %s", entrada->ocorrencias[i], linhas[entrada->ocorrencias[i] - 1]);
     }
+    printf("\n");
 }
