@@ -63,7 +63,8 @@ Indice criaIndex(FILE *file) {
 void printOcorrencias(Entrada *entrada, char **linhas) {
     printf("Existem %d ocorrências da palavra '%s' na(s) seguinte(s) linha(s):\n", entrada->contador, entrada->palavra);
     for (int i = 0; i < entrada->contador; i++) {
-        printf("%05d: %s", entrada->ocorrencias[i], linhas[entrada->ocorrencias[i] - 1]);
+        if (entrada->ocorrencias[i] != entrada->ocorrencias[i+1]){
+            printf("%05d: %s", entrada->ocorrencias[i], linhas[entrada->ocorrencias[i] - 1]);
+        }
     }
-    printf("\n");
 }
