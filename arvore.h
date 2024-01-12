@@ -15,6 +15,7 @@ typedef struct Ocorrencia {
 typedef struct No {
     char palavra[TAMANHOPALAVRA];
     Ocorrencia *ocorrencias;
+    int contador;
     struct No *esquerda;
     struct No *direita;
 } treeno;

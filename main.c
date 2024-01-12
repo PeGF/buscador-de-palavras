@@ -56,6 +56,9 @@ int main(int argc, char *argv[]) {
             if (strcmp(comando, "busca") == 0) {
                 char word[100];
                 scanf("%s", word);
+                for (int i=0; word[i]; i++){
+                    word[i] = tolower(word[i]);
+                }
 
                 inicioTempo = clock();
                 Entrada *result = procuraPalavra(&indice, word);
@@ -117,6 +120,9 @@ int main(int argc, char *argv[]) {
             palavra = strtok(linha, " ");
 
             while (palavra != NULL) {
+                for (int i = 0; palavra[i]; i++){
+                    palavra[i] = tolower(palavra[i]);
+                }
                 raiz = inserirPalavra(raiz, palavra, contador_linha, conteudoLinha);
                 palavra = strtok(NULL, " ");
             }
@@ -143,6 +149,9 @@ int main(int argc, char *argv[]) {
 
                 clock_t inicioBusca = clock();
                 scanf("%s", palavraBuscada);
+                for (int i = 0; palavraBuscada[i]; i++){
+                    palavraBuscada[i] = tolower(palavraBuscada[i]);
+                }
                 TreeVerificarPalavra(raiz, palavraBuscada);
                 clock_t fimBusca = clock();
                 double tempoTotalBusca = ((double)(fimBusca - inicioBusca) / CLOCKS_PER_SEC) * 1000.0;

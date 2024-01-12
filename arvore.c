@@ -23,8 +23,8 @@ treeno *criarNo(const char *palavra, int linha, const char *conteudo) {
     strncpy(novaOcorrencia->conteudo, conteudo, TAMANHOLINHA - 1);
     novaOcorrencia->conteudo[TAMANHOLINHA - 1] = '\0';
     novaOcorrencia->prox = NULL;
-
     novoNo->ocorrencias = novaOcorrencia;
+    novoNo->contador = 1;
     novoNo->esquerda = NULL;
     novoNo->direita = NULL;
 
@@ -73,6 +73,7 @@ treeno *inserirPalavra(treeno *raiz, const char *palavra, int linha, const char 
         novaOcorrencia->conteudo[TAMANHOLINHA - 1] = '\0';
         novaOcorrencia->prox = raiz->ocorrencias;
         raiz->ocorrencias = novaOcorrencia;
+        raiz->contador += 1;
     }
 
     return raiz;
@@ -84,8 +85,14 @@ void imprimeReverso(Ocorrencia* ocorrenciaAtual)
        return;
  
     imprimeReverso(ocorrenciaAtual->prox);
-
-    printf("  %05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+    if (ocorrenciaAtual->prox != NULL){
+        if (ocorrenciaAtual->linha != ocorrenciaAtual->prox->linha){
+                printf("  %05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+        }
+    }
+    else {
+        printf("  %05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+    }
 }
 
 void TreeVerificarPalavra(treeno *raiz, const char *alvo) {
@@ -97,7 +104,7 @@ void TreeVerificarPalavra(treeno *raiz, const char *alvo) {
     int comparacao = strcmp(alvo, raiz->palavra);
 
     if (comparacao == 0) {
-        printf("Palavra '%s' encontrada nas seguintes linhas:\n", alvo);
+        printf("Existem %d ocorrências da palavra '%s' na(s) seguinte(s) linha(s):\n", raiz->contador, alvo);
 
         Ocorrencia *ocorrenciaAtual = raiz->ocorrencias;
         imprimeReverso(ocorrenciaAtual);
