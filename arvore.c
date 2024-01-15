@@ -39,7 +39,7 @@ void imprimirArvore(treeno* raiz){
 
         Ocorrencia* ocorrenciaAtual = raiz->ocorrencias;
         while (ocorrenciaAtual != NULL){
-            printf("   Linha %d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+            printf("Linha %d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
             ocorrenciaAtual = ocorrenciaAtual->prox;
         }
         printf("\n");
@@ -87,11 +87,11 @@ void imprimeReverso(Ocorrencia* ocorrenciaAtual)
     imprimeReverso(ocorrenciaAtual->prox);
     if (ocorrenciaAtual->prox != NULL){
         if (ocorrenciaAtual->linha != ocorrenciaAtual->prox->linha){
-                printf("  %05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+                printf("%05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
         }
     }
     else {
-        printf("  %05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
+        printf("%05d: %s\n", ocorrenciaAtual->linha, ocorrenciaAtual->conteudo);
     }
 }
 

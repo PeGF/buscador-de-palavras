@@ -36,7 +36,7 @@ Indice criaIndex(FILE *file) {
 
     while (fgets(linha, sizeof(linha), file)) {
         numeroLinha++;
-        char *token = strtok(linha, " ,.!?\n");
+        char *token = strtok(linha, " -,.!?\n");
 
         while (token != NULL) {
             for (int i = 0; token[i]; i++) {
@@ -52,7 +52,7 @@ Indice criaIndex(FILE *file) {
                 adicionaOcorrencia(entrada, numeroLinha);
             }
 
-            token = strtok(NULL, " ,.!?\n");
+            token = strtok(NULL, " -,.!?\n");
         }
     }
     indice.numeroDeLinhas = numeroLinha;

@@ -117,14 +117,19 @@ int main(int argc, char *argv[]) {
             char conteudoLinha[TAMANHOLINHA];
             strncpy(conteudoLinha, linha, TAMANHOLINHA - 1);
             conteudoLinha[TAMANHOLINHA - 1] = '\0';
-            palavra = strtok(linha, " ");
+            palavra = strtok(linha, " -,.!?\n");
 
             while (palavra != NULL) {
                 for (int i = 0; palavra[i]; i++){
-                    palavra[i] = tolower(palavra[i]);
+                    if(palavra[i] != '\n'){
+                        palavra[i] = tolower(palavra[i]);
+                    }
+                    else{
+                        palavra[i] = '\0';
+                    }
                 }
                 raiz = inserirPalavra(raiz, palavra, contador_linha, conteudoLinha);
-                palavra = strtok(NULL, " ");
+                palavra = strtok(NULL, " -,.!?\n");
             }
         }
 
@@ -150,12 +155,17 @@ int main(int argc, char *argv[]) {
                 clock_t inicioBusca = clock();
                 scanf("%s", palavraBuscada);
                 for (int i = 0; palavraBuscada[i]; i++){
-                    palavraBuscada[i] = tolower(palavraBuscada[i]);
+                    if(palavraBuscada[i] != '\n'){
+                        palavraBuscada[i] = tolower(palavraBuscada[i]);
+                    }
+                    else{
+                        palavraBuscada[i] = '\0';
+                    }
                 }
                 TreeVerificarPalavra(raiz, palavraBuscada);
                 clock_t fimBusca = clock();
                 double tempoTotalBusca = ((double)(fimBusca - inicioBusca) / CLOCKS_PER_SEC) * 1000.0;
-                printf("Tempo de busca: %.4f\n", tempoTotalBusca);
+                printf("Tempo de busca: %.4f ms\n", tempoTotalBusca);
 
             }
 
